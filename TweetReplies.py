@@ -1,18 +1,14 @@
 import csv
 import tweepy
 import ssl
-
+from decouple import config
 # Oauth keys
-# consumer_key = "QN3CzI2gScYvDsrhhaL2SRbOPrC"
-# consumer_secret = "AQU3NwlOqUb1aKxgy0Nk22H5k8jjj0tYJ4nlFRLFZQJCA07TLCJMm"
-# access_token = "969527167221563392-35WKxHqmuLkkqfe1zqQbmSN276vZTFAbz"
-# access_token_secret = "wplE6EPMtyqNRESaBV175jRzU5ffgq934nX3h2dNQ7rnzarg"
 
 # Twitter Credentials Obtained from http://dev.twitter.com
-consumer_key = 'es7Cc04wHnIRAJRHQhyao0D7J'
-consumer_secret = 'H8uAcTvnb3QDrIgBbUcmnzF5IalBP1YACT08maNR2TTOH1u3Np'
-access_key = '854640685-itFm20HBrxoWHjJMBgOrJFuRIA7ubWaadKrmUF4v'
-access_secret = '4vvIk8vfx3RFWI5Gtupvg8ZHYIFAOf2phHyIA0jETHiW3'
+consumer_key = config('COMSUMER_KEY')
+consumer_secret = config('COMSUMER_SECRET')
+access_key = config('ACCESS_KEY')
+access_secret = config('ACCESS_SECRET')
 
 # Create Auth object
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -51,10 +47,10 @@ try:
     a = 0
     for tweet in tweepy.Cursor(api.search,
                            q="DonaldTrump",
-                           count=1000,
+                           count=2000,
                            result_type="recent",
                            include_entities=True,
-                           lang="en").items(1000):
+                           lang="en").items(2000):
         # print(tweet.text)
         replies.append(tweet)
         # if a == 0:
@@ -62,10 +58,10 @@ try:
         #     a = 1
     for tweet in tweepy.Cursor(api.search,
                            q="JoeBiden",
-                           count=1000,
+                           count=2000,
                            result_type="recent",
                            include_entities=True,
-                           lang="en").items(1000):
+                           lang="en").items(2000):
         # print(tweet.text)
         bidenReplies.append(tweet)
     # for tweet in tweepy.Cursor(api.search,q='to:'+name, result_type='recent', timeout=999999).items(100):
